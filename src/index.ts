@@ -1,23 +1,27 @@
 import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { EnhancedStore } from '@reduxjs/toolkit'
+import type { EnhancedStore } from '@reduxjs/toolkit'
 
-import type { ApiConfig, IApiStorageData, ResponseApi } from './types'
+import type { ApiConfig, IApiStorageData, ResponseApi, Toast } from './types'
 import { responseDto, responseError } from './utils'
 
-export class Api<T extends Record<string, any>> {
+export class SimpleApi<T extends IApiStorageData> {
   public fetchId: number
   public readonly api: AxiosInstance
   private readonly disableIncFetch: boolean
   private readonly enableRefreshToken: boolean
+  private readonly toast?: Toast
 
   constructor(
     public readonly appName: string,
-    public store: EnhancedStore<T>,
-    { enableRefreshToken, disableIncFetch, ...options }: ApiConfig
+    public store?: EnhancedStore<T>,
+    config: ApiConfig = {}
   ) {
+    const { enableRefreshToken, disableIncFetch, toast, ...options } = config
+
     this.api = Axios.create(options)
     this.enableRefreshToken = !!enableRefreshToken
     this.disableIncFetch = !!disableIncFetch
+    if (toast) this.toast = toast
 
     this.fetchId = 0
 
@@ -40,7 +44,7 @@ export class Api<T extends Record<string, any>> {
    * Removido implementação de refresh token
    */
   private setInterceptorResponse() {
-    this.api.interceptors.response.use(responseDto, responseError)
+    this.api.interceptors.response.use(responseDto, responseError(this.toast))
   }
 
   private normalizeUrl(path?: string): string {
@@ -62,10 +66,11 @@ export class Api<T extends Record<string, any>> {
   }
 
   private getApiStorageData(): IApiStorageData {
-    const { auth } = this.store.getState()
+    const state = this?.store?.getState?.()
+
     return {
-      token: auth?.token || '',
-      refreshToken: auth?.refreshToken || '',
+      token: state?.token || '',
+      refreshToken: state?.refreshToken || '',
     }
   }
 
@@ -124,3 +129,5 @@ export class Api<T extends Record<string, any>> {
     return response && response.data
   }
 }
+
+export * from './types'
