@@ -1,0 +1,31 @@
+{
+  "name": "@severoemanuel/simple-api",
+  "version": "1.0.0",
+  "description": "Simple service for api with axios",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --transpile-only"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/severoemanuel/simple-api.git"
+  },
+  "author": "severoemanuel <fs.severoemanuel@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/severoemanuel/simple-api/issues"
+  },
+  "homepage": "https://github.com/severoemanuel/simple-api#readme",
+  "peerDependencies": {
+    "axios": "^0.27.2",
+    "camelcase-keys": "^8.0.1",
+    "react-toastify": "^9.0.7"
+  },
+  "optionalDependencies": {
+    "@reduxjs/toolkit": "^1.8.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
