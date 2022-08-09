@@ -20,11 +20,11 @@
   "homepage": "https://github.com/severoemanuel/simple-api#readme",
   "peerDependencies": {
     "axios": "^0.27.2",
-    "camelcase-keys": "^8.0.1",
-    "react-toastify": "^9.0.7"
+    "camelcase-keys": "^8.0.1"
   },
   "optionalDependencies": {
-    "@reduxjs/toolkit": "^1.8.3"
+    "@reduxjs/toolkit": "^1.8.3",
+    "react-toastify": "^9.0.8"
   },
   "devDependencies": {
     "typescript": "^4.7.4"
