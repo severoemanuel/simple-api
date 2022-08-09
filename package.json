@@ -1,6 +1,6 @@
 {
   "name": "@severoemanuel/simple-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple service for api with axios",
   "main": "build/index.js",
   "scripts": {
